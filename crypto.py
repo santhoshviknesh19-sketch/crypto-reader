@@ -21,29 +21,29 @@ volume_initialized = False
 
 def update_metadata():
     global volume_initialized
-    print("[REST] Syncing 24h Stats...")
+    print("[REST] Syncing 24h Stats & News...")
     for symbol in top_coins:
         try:
             quote = finnhub_client.quote(symbol)
+            change = quote['dp']
+            icon = "▲" if change >= 0 else "▼"
             
             if symbol not in dashboard_data:
                 dashboard_data[symbol] = {"raw_volume": float(quote.get('v', 0))}
             
             dashboard_data[symbol].update({
                 "price": f"{quote['c']:.2f}" if symbol != "BINANCE:DOGEUSDT" else f"{quote['c']:.4f}",
-                "open_24h": f"${quote['o']:.2f}" if symbol != "BINANCE:DOGEUSDT" else f"${quote['o']:.4f}",
-                "prev_close": quote['pc'],
+                "change_24h": f"{icon} {change:.2f}%",
                 "day_range": f"L: ${quote['l']:.2f} - H: ${quote['h']:.2f}" if symbol != "BINANCE:DOGEUSDT" \
                     else f"L: ${quote['l']:.4f} - H: ${quote['h']:.4f}",
-                "change_24h": "..." 
+                "volume_24h": f"{dashboard_data[symbol]['raw_volume']:,.2f}"
             })
-            
         except Exception as e:
-            print(f"Error: {e}")
+            print(f"Price Error: {e}")
+
     try:
         news = finnhub_client.general_news('crypto', min_id=0)
-        headlines = [n['headline'] for n in news[:10]]
-        dashboard_data["news_ticker"] = headlines
+        dashboard_data["news_ticker"] = [n['headline'] for n in news[:10]]
     except Exception as e:
         print(f"News Error: {e}")
 

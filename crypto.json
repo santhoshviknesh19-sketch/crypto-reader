@@ -1,0 +1,42 @@
+{
+    "BINANCE:BTCUSDT": {
+        "raw_volume": 0.0,
+        "price": "69069.89",
+        "change_24h": "▲ 0.98%",
+        "day_range": "L: $67294.11 - H: $70126.67",
+        "volume_24h": "0.00"
+    },
+    "BINANCE:ETHUSDT": {
+        "raw_volume": 0.0,
+        "price": "2003.96",
+        "change_24h": "▲ 2.29%",
+        "day_range": "L: $1937.24 - H: $2023.51",
+        "volume_24h": "0.00"
+    },
+    "BINANCE:SOLUSDT": {
+        "raw_volume": 0.0,
+        "price": "87.31",
+        "change_24h": "▲ 1.67%",
+        "day_range": "L: $82.55 - H: $87.41",
+        "volume_24h": "0.00"
+    },
+    "BINANCE:DOGEUSDT": {
+        "raw_volume": 0.0,
+        "price": "0.1009",
+        "change_24h": "▼ -1.33%",
+        "day_range": "L: $0.0985 - H: $0.1036",
+        "volume_24h": "0.00"
+    },
+    "news_ticker": [
+        "Germany‘s central bank president touts stablecoin and CBDC benefits for EU",
+        "ETH chart pattern projects rally to $2.5K if key conditions are met: Data",
+        "Paradigm reframes Bitcoin mining as grid asset, not energy drain",
+        "Price predictions 2/16: SPX, DXY, BTC, ETH, BNB, XRP, SOL, DOGE, ADA, BCH",
+        "Hong Kong regulator adds Victory Fintech to list of approved trading platforms",
+        "Bitcoin accumulation wave puts $80K back in play: Analyst",
+        "Bitcoin weekly RSI echoes mid-2022 bear market as BTC plays liquidity games",
+        "'We do not do illegal things': Inside a U.S.-sanctioned stablecoin issuer's race to build a crypto giant",
+        "Harvard endowment reduces stake in Bitcoin ETF, adds Ether exposure",
+        "Tokenized RWAs climb 13.5% despite $1T crypto market drawdown"
+    ]
+}

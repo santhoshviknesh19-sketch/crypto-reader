@@ -1,5 +1,4 @@
 .env
-crypto.json
 *.json.tmp
 
 # Byte-compiled / optimized / DLL files

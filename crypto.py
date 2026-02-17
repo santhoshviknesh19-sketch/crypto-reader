@@ -2,6 +2,7 @@ import finnhub
 import json
 import websocket
 import os
+import sys
 import threading
 import time
 from dotenv import load_dotenv
@@ -80,7 +81,13 @@ def run_websocket():
 
 if __name__ == "__main__":
     update_metadata()
-    threading.Thread(target=run_websocket, daemon=True).start()
-    while True:
-        time.sleep(60)
-        update_metadata()
+    
+    if "--once" in sys.argv:
+        print("Running one-time update for GitHub...")
+        save_json()
+        print("Done!")
+    else:
+        threading.Thread(target=run_websocket, daemon=True).start()
+        while True:
+            time.sleep(60)
+            update_metadata()

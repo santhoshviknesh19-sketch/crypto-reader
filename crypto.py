@@ -86,6 +86,7 @@ if __name__ == "__main__":
         print("Running one-time update for GitHub...")
         save_json()
         print("Done!")
+        sys.exit(0)
     else:
         threading.Thread(target=run_websocket, daemon=True).start()
         while True:

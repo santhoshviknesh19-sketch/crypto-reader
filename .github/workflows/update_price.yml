@@ -34,6 +34,6 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add crypto.json
-          git commit -m "Bot updated prices" || exit 0
-          git push
+          git add -f .gitignore
+          git commit -m "Update gitignore via action" || echo "No changes"
+          git push origin main

@@ -1,0 +1,28 @@
+name: Update Doge Price
+on:
+  schedule:
+    - cron: '0 * * * *'
+  workflow_dispatch: # run it manually
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - name: Install dependencies
+        run: pip install finnhub websocket python-dotenv
+      - name: Run script
+        env:
+          FINNHUB_API_KEY: ${{ secrets.FINNHUB_API_KEY }}
+        run: python main.py
+      - name: Commit and Push changes
+        run: |
+          git config --global user.name "GitHub Action"
+          git config --global user.email "action@github.com"
+          git add crypto.json
+          git commit -m "Update Doge price" || exit 0
+          git push

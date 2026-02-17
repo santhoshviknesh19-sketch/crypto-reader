@@ -33,46 +33,42 @@
     </table>
 
     <script>
-        let lastPrices = {};
+       let lastPrices = {};
 
         async function updateDashboard() {
             try {
                 const res = await fetch('crypto.json?t=' + Date.now());
                 const data = await res.json();
-                const container = document.getElementById('market-body');
                 
+            if (data.news_ticker) {
+                document.getElementById('news-ticker').innerText = 
+                    data.news_ticker.map(h => `• ${h}`).join('    ');
+            }
+
+                const container = document.getElementById('market-body');
                 let html = '';
+
                 for (const [symbol, info] of Object.entries(data)) {
-                    const priceId = `price-${symbol}`;
+                    if (symbol === 'news_ticker') continue;
+
                     const currentPrice = parseFloat(info.price);
                     const oldPrice = lastPrices[symbol] || currentPrice;
-                  
-                    let flashClass = '';
-                    if (currentPrice > oldPrice) flashClass = 'price-up';
-                    else if (currentPrice < oldPrice) flashClass = 'price-down';
-                    
+                    let flashClass = (currentPrice > oldPrice) ? 'price-up' : (currentPrice < oldPrice ? 'price-down' : '');
                     lastPrices[symbol] = currentPrice;
 
                     html += `<tr>
                         <td><b>${symbol.split(':')[1]}</b></td>
-                        <td id="${priceId}" class="${flashClass}">$${currentPrice}</td>
+                        <td class="${flashClass}">$${info.price}</td>
                         <td style="color: ${info.change_24h.includes('▲') ? 'var(--green)' : 'var(--red)'}">${info.change_24h}</td>
                         <td><small>${info.day_range}</small></td>
-                        <td>${info.volume_24h}</td>
+                        <td>${info.volume_24h || '0.00'}</td>
                     </tr>`;
                 }
                 container.innerHTML = html;
-            } catch (e) { console.log("Waiting for JSON update..."); }
-        }
-
-        async function fetchNews() {
-            const res = await fetch(`https://finnhub.io/api/v1/news?category=crypto&token=REPLACE_WITH_YOUR_KEY`);
-            const news = await res.json();
-            document.getElementById('news-ticker').innerText = news.map(n => `• ${n.headline}`).join('   ');
-        }
-
-        setInterval(updateDashboard, 1000);
-        fetchNews();
+            } catch (e) { console.log("Waiting for data update..."); }
+        }    
+        setInterval(updateDashboard, 5000);
+        updateDashboard();
     </script>
 </body>
 </html>

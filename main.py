@@ -5,10 +5,10 @@ import os
 import sys
 import threading
 import time
-from dotenv import load_dotenv
 
-load_dotenv()
 API_KEY = os.getenv("FINNHUB_API_KEY")
+if not API_KEY:
+    print("❌ Error: FINNHUB_API_KEY not found in environment variables!")
 
 top_coins = ["BINANCE:BTCUSDT", "BINANCE:ETHUSDT", "BINANCE:SOLUSDT", "BINANCE:DOGEUSDT"]
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))

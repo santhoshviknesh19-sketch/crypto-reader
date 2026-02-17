@@ -28,7 +28,7 @@ jobs:
       - name: Run Doge Script
         env:
           FINNHUB_API_KEY: ${{ secrets.FINNHUB_API_KEY }}
-        run: python main.py
+        run: python main.py --once
 
       - name: Commit and Push changes
         run: |

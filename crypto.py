@@ -40,6 +40,12 @@ def update_metadata():
             
         except Exception as e:
             print(f"Error: {e}")
+    try:
+        news = finnhub_client.general_news('crypto', min_id=0)
+        headlines = [n['headline'] for n in news[:10]]
+        dashboard_data["news_ticker"] = headlines
+    except Exception as e:
+        print(f"News Error: {e}")
 
 def save_json():
     temp_file = SAVE_FILE + ".tmp"

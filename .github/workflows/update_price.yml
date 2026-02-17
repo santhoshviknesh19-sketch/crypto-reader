@@ -23,7 +23,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install finnhub websocket-client python-dotenv
+          pip install finnhub-python websocket-client python-dotenv
 
       - name: Run Doge Script
         env:

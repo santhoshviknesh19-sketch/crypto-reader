@@ -32,9 +32,8 @@ jobs:
 
       - name: Commit and Push changes
         run: |
-          git config --global user.name "GitHub Action Bot"
-          git config --global user.email "actions@github.com"
-          # The -f (force) ensures it's added even if git is being stubborn
-          git add -f crypto.json
-          git commit -m "Automated crypto price update" || echo "No changes to commit"
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add crypto.json
+          git commit -m "Bot updated prices" || exit 0
           git push

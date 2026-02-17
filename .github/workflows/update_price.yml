@@ -1,7 +1,7 @@
 name: Update Crypto Price
 on:
   schedule:
-    - cron: '0 * * * *'
+    - cron: '*/5 * * * *'
   workflow_dispatch:
 
 permissions:
@@ -25,10 +25,10 @@ jobs:
         run: |
           pip install finnhub-python websocket-client python-dotenv
 
-      - name: Run Doge Script
+      - name: Run Crypto Script
         env:
           FINNHUB_API_KEY: ${{ secrets.FINNHUB_API_KEY }}
-        run: python main.py --once
+        run: python main.py
 
       - name: Commit and Push changes
         run: |

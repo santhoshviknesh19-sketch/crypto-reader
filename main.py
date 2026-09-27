@@ -56,7 +56,7 @@ def save_json():
     except Exception as e:
         pass
 
-def on_message(ws, message):
+def on_message(message):
     data = json.loads(message)
     if data.get('type') == 'trade':
         for trade in data['data']:
